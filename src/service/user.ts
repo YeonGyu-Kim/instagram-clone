@@ -4,22 +4,20 @@ type OAuthUser = {
   id: string;
   email: string;
   name: string;
+  username: string;
   image?: string | null;
 };
 
-export async function addUser({ id, email, name, image }: OAuthUser) {
-  const doc = {
+export async function addUser({ id, email, name, username, image }: OAuthUser) {
+  return client.createIfNotExists({
     _id: id,
     _type: 'user',
     email,
     name,
+    username,
     image,
     following: [],
     followers: [],
     bookmarks: [],
-  };
-
-  return client.createIfNotExists(doc).then((res) => {
-    console.log('Bike was created (or was already present)');
   });
 }
