@@ -2,8 +2,15 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { getProviders } from 'next-auth/react';
 import Signin from '@/components/Signin';
-import { authOptions } from '../[...nextauth]/route';
-export default async function SigninPage() {
+import { authOptions } from '../../api/auth/[...nextauth]/route';
+
+type Props = {
+  searchParams: { callbackUrl: string };
+};
+
+export default async function SigninPage({
+  searchParams: { callbackUrl },
+}: Props) {
   const session = await getServerSession(authOptions);
   if (session) {
     redirect('/');
@@ -13,7 +20,7 @@ export default async function SigninPage() {
 
   return (
     <>
-      <Signin providers={providers} />
+      <Signin providers={providers} callbackUrl={callbackUrl} />
     </>
   );
 }
