@@ -1,10 +1,8 @@
-import NextAuth, { DefaultSession } from 'next-auth';
+import NextAuth from 'next-auth';
+import { User } from '../../sanity-studio/model/user';
 
 declare module 'next-auth' {
   interface Session {
-    user: {
-      /** The user's postal address. */
-      username: string;
-    } & DefaultSession['user'];
+    user: User;
   }
 }

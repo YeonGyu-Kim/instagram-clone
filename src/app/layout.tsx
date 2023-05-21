@@ -17,12 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={openSans.className}>
+      <body className={`${openSans.className} bg-bg-gray text-font-white`}>
         <AuthContext>
-          <header>
+          <div className='flex'>
             <Navbar />
-          </header>
-          <main>{children}</main>
+            <main className='w-full'>{children}</main>
+          </div>
         </AuthContext>
       </body>
     </html>
