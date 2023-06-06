@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import './globals.css';
 import { Open_Sans } from 'next/font/google';
 import AuthContext from '@/context/AuthContext';
+import SWRConfigContext from '@/context/SWRConfigContext';
 
 const openSans = Open_Sans({ subsets: ['latin'] });
 
@@ -21,7 +22,9 @@ export default function RootLayout({
         <AuthContext>
           <div className='flex'>
             <Navbar />
-            <main className='w-full'>{children}</main>
+            <main className='w-full'>
+              <SWRConfigContext>{children}</SWRConfigContext>
+            </main>
           </div>
         </AuthContext>
       </body>
