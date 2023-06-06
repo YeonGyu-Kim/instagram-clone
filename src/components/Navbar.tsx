@@ -28,7 +28,7 @@ export default function Navbar() {
         </div>
       </div>
       <div className='flex items-center'>
-        {user && <Avatar image={user?.image} />}
+        {user && <Avatar image={user?.image} highlight={false} />}
         {session ? (
           <div className='text-btn-blue' onClick={() => signOut()}>
             로그아웃
