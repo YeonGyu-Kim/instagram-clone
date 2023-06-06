@@ -15,9 +15,7 @@ export default async function SigninPage({
   if (session) {
     redirect('/');
   }
-
   const providers = (await getProviders()) ?? {};
-
   return (
     <>
       <Signin providers={providers} callbackUrl={callbackUrl} />

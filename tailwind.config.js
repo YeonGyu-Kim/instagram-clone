@@ -27,7 +27,10 @@ module.exports = {
       'bg-gray': '#121212',
       'bg-black': '#000000',
       'font-white': '#F5F5F5',
+      fuchsia: '#D20970',
+      rose: '#FF007F',
+      amber: '#FFBF00',
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };

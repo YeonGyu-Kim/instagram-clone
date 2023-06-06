@@ -1,5 +1,5 @@
-import { useSession } from 'next-auth/react';
 import { User } from '../../sanity-studio/model/user';
+import Avatar from './Avatar';
 
 type Props = {
   user: User;
@@ -7,18 +7,12 @@ type Props = {
 
 export default function SideBar({ user: { name, email, image } }: Props) {
   return (
-    <section className='flex flex-col w-full max-w-[319px]'>
+    <section className='flex flex-col w-full max-w-[319px] ml-6'>
       <div className='flex items-center pb-4'>
         {image && (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className='rounded-full'
-              width={56}
-              height={56}
-              src={image}
-              alt='userImage'
-            />
+            <Avatar image={image} size='normal' highlight={false} />
           </>
         )}
         <div className='flex flex-col px-5'>
