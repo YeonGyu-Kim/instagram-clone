@@ -12,7 +12,7 @@ export default function SideBar({ user: { name, email, image } }: Props) {
         {image && (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <Avatar image={image} size='normal' highlight={false} />
+            <Avatar image={image} size='medium' highlight={false} />
           </>
         )}
         <div className='flex flex-col px-5'>

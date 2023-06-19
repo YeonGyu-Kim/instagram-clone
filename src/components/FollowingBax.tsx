@@ -10,7 +10,7 @@ export default function FollowingBox() {
   const followingUsers = data?.following;
 
   return (
-    <section className='mb-4 flex justify-center items-center w-full rounded-lg shadow-sm p-4 shadow-underline-gray overflow-x-auto scrollbar-thin scrollbar-thumb-fuchsia scrollbar-track-bg-gray'>
+    <section className='mb-4 flex justify-center items-center w-full rounded-lg shadow-sm p-4 border border-border-gray overflow-x-auto scrollbar-thin scrollbar-thumb-fuchsia scrollbar-track-bg-gray'>
       {loading ? (
         <DotLoader size={32} color='#F60485' />
       ) : (
@@ -21,9 +21,9 @@ export default function FollowingBox() {
       {followingUsers && followingUsers.length > 0 && (
         <ul className='flex w-full gap-2'>
           {followingUsers.map(({ username, image }, index) => (
-            <li key={`${username}-${index}`} className='last:pr-4'>
+            <li key={`${username}-${index}`} className='text-center last:pr-4'>
               <Link href={`/uesr/${username}`}>
-                <Avatar image={image} size='normal' highlight />
+                <Avatar image={image} size='large' highlight />
                 <span>{username}</span>
               </Link>
             </li>
