@@ -15,7 +15,7 @@ export default function SideBar({ user: { name, email, image } }: Props) {
             <Avatar image={image} size='medium' highlight={false} />
           </>
         )}
-        <div className='flex flex-col px-5'>
+        <div className='flex flex-col px-4'>
           <span>{email?.split('@')[0]}</span>
           <span>{name}</span>
         </div>

@@ -23,6 +23,7 @@ module.exports = {
     colors: {
       'btn-blue': '#0095F6',
       'btn-gray': '#EFEFEF',
+      'btn-post': '#5A6E80',
       'border-gray': '#363636',
       'underline-gray': '#DBDBDB',
       'bg-gray': '#121212',
