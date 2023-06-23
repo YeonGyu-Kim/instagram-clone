@@ -12,10 +12,10 @@ export default function SideBar({ user: { name, email, image } }: Props) {
         {image && (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <Avatar image={image} size='normal' highlight={false} />
+            <Avatar image={image} size='medium' highlight={false} />
           </>
         )}
-        <div className='flex flex-col px-5'>
+        <div className='flex flex-col px-4'>
           <span>{email?.split('@')[0]}</span>
           <span>{name}</span>
         </div>
