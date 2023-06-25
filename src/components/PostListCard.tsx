@@ -1,8 +1,12 @@
+'use client';
 import Image from 'next/image';
-import { SimplePost } from '../../sanity-studio/model/posts';
 import Avatar from './Avatar';
 import CommentForm from './CommentForm';
 import ActionBar from './ActionBar';
+import { SimplePost } from '../../sanity-studio/model/posts';
+import { useState } from 'react';
+import ModalPortal from './ui/ModalPortal';
+import PostModal from './PostModal';
 
 type Props = {
   post: SimplePost;
@@ -11,6 +15,7 @@ type Props = {
 
 export default function PostListCard({ post, priority = false }: Props) {
   const { username, userImage, image, likes, text, createdAt } = post;
+  const [openModal, setOpenModal] = useState(false);
   return (
     <article className='rounded-lg border border-border-gray mb-4'>
       <div className='flex items-center p-2'>
@@ -24,6 +29,7 @@ export default function PostListCard({ post, priority = false }: Props) {
         width={500}
         height={500}
         priority={priority}
+        onClick={() => setOpenModal(true)}
       />
       <ActionBar
         username={username}
@@ -32,6 +38,13 @@ export default function PostListCard({ post, priority = false }: Props) {
         likes={likes}
       />
       <CommentForm />
+      {openModal && (
+        <ModalPortal>
+          <PostModal onClose={() => setOpenModal(false)}>
+            포스트 상세 페이지!!!
+          </PostModal>
+        </ModalPortal>
+      )}
     </article>
   );
 }
