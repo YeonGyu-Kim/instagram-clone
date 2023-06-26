@@ -27,6 +27,7 @@ export default function RootLayout({
             </main>
           </div>
         </AuthContext>
+        <div id='portal'></div>
       </body>
     </html>
   );

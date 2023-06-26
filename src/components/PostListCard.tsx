@@ -1,8 +1,13 @@
+'use client';
 import Image from 'next/image';
-import { SimplePost } from '../../sanity-studio/model/posts';
-import Avatar from './Avatar';
 import CommentForm from './CommentForm';
 import ActionBar from './ActionBar';
+import { useState } from 'react';
+import ModalPortal from './ui/ModalPortal';
+import PostModal from './PostModal';
+import PostUserAvatar from './PostUserAvatar';
+import PostDetail from './PostDetail';
+import { SimplePost } from '../../sanity-studio/model/posts';
 
 type Props = {
   post: SimplePost;
@@ -11,12 +16,10 @@ type Props = {
 
 export default function PostListCard({ post, priority = false }: Props) {
   const { username, userImage, image, likes, text, createdAt } = post;
+  const [openModal, setOpenModal] = useState(false);
   return (
     <article className='rounded-lg border border-border-gray mb-4'>
-      <div className='flex items-center p-2'>
-        <Avatar image={userImage} size='small' highlight={false} />
-        <span className='text-sm ml-1'>{username}</span>
-      </div>
+      <PostUserAvatar image={userImage} username={username} />
       <Image
         className='w-full object-cover aspect-square'
         src={image}
@@ -24,6 +27,7 @@ export default function PostListCard({ post, priority = false }: Props) {
         width={500}
         height={500}
         priority={priority}
+        onClick={() => setOpenModal(true)}
       />
       <ActionBar
         username={username}
@@ -32,6 +36,13 @@ export default function PostListCard({ post, priority = false }: Props) {
         likes={likes}
       />
       <CommentForm />
+      {openModal && (
+        <ModalPortal>
+          <PostModal onClose={() => setOpenModal(false)}>
+            <PostDetail post={post} />
+          </PostModal>
+        </ModalPortal>
+      )}
     </article>
   );
 }

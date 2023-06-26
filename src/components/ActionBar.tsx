@@ -13,7 +13,7 @@ type Props = {
 export default function ActionBar({ username, text, createdAt, likes }: Props) {
   return (
     <div className='p-3 text-sm'>
-      <p className='flex justify-between pb-1'>
+      <div className='flex justify-between pb-1'>
         <div className='flex gap-3'>
           <HeartIcon />
           <CommentIcon />
@@ -21,12 +21,14 @@ export default function ActionBar({ username, text, createdAt, likes }: Props) {
         <div>
           <BookmarkIcon />
         </div>
-      </p>
+      </div>
       <p>{`좋아요 ${likes?.length ?? 0}개`}</p>
-      <p className='py-1'>
-        <span>{username}</span>
-        <span className='ml-1 font-light'>{text}</span>
-      </p>
+      {text && (
+        <p className='py-1'>
+          <span>{username}</span>
+          <span className='ml-1 font-light'>{text}</span>
+        </p>
+      )}
       <p>{parseDate(createdAt)}</p>
     </div>
   );
