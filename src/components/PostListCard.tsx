@@ -8,6 +8,7 @@ import { useState } from 'react';
 import ModalPortal from './ui/ModalPortal';
 import PostModal from './PostModal';
 import PostDetail from './PostDetail';
+import PostUserAvatar from './PostUserAvatar';
 
 type Props = {
   post: SimplePost;
@@ -19,10 +20,7 @@ export default function PostListCard({ post, priority = false }: Props) {
   const [openModal, setOpenModal] = useState(false);
   return (
     <article className='rounded-lg border border-border-gray mb-4'>
-      <div className='flex items-center p-2'>
-        <Avatar image={userImage} size='small' highlight={false} />
-        <span className='text-sm ml-1'>{username}</span>
-      </div>
+      <PostUserAvatar image={userImage} username={username} />
       <Image
         className='w-full object-cover aspect-square'
         src={image}

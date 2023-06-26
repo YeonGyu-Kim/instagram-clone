@@ -23,10 +23,12 @@ export default function ActionBar({ username, text, createdAt, likes }: Props) {
         </div>
       </div>
       <p>{`좋아요 ${likes?.length ?? 0}개`}</p>
-      <p className='py-1'>
-        <span>{username}</span>
-        <span className='ml-1 font-light'>{text}</span>
-      </p>
+      {text && (
+        <p className='py-1'>
+          <span>{username}</span>
+          <span className='ml-1 font-light'>{text}</span>
+        </p>
+      )}
       <p>{parseDate(createdAt)}</p>
     </div>
   );

@@ -21,7 +21,7 @@ export default function PostModal({ children, onClose }: Props) {
       >
         <CloseIcon />
       </button>
-      {children}
+      <div className='bg-bg-black w-4/5 h-3/5 max-w-7xl'> {children}</div>
     </section>
   );
 }
