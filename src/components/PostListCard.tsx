@@ -7,6 +7,7 @@ import { SimplePost } from '../../sanity-studio/model/posts';
 import { useState } from 'react';
 import ModalPortal from './ui/ModalPortal';
 import PostModal from './PostModal';
+import PostDetail from './PostDetail';
 
 type Props = {
   post: SimplePost;
@@ -41,7 +42,7 @@ export default function PostListCard({ post, priority = false }: Props) {
       {openModal && (
         <ModalPortal>
           <PostModal onClose={() => setOpenModal(false)}>
-            포스트 상세 페이지!!!
+            <PostDetail post={post} />
           </PostModal>
         </ModalPortal>
       )}

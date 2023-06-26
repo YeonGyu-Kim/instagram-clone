@@ -14,7 +14,7 @@ export type FullPost = {
   image: string
   likes: string[]
   text: string
-  comments: number
+  comments: Comment[]
   id: string
   createdAt: string
 }
