@@ -7,7 +7,6 @@ import { SimplePost } from '../../sanity-studio/model/posts';
 import { useState } from 'react';
 import ModalPortal from './ui/ModalPortal';
 import PostModal from './PostModal';
-import PostDetail from './PostDetail';
 import PostUserAvatar from './PostUserAvatar';
 
 type Props = {
