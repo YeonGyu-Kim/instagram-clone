@@ -1,4 +1,4 @@
-import { SimplePost } from '../../sanity-studio/model/posts';
+import { SimplePost } from '../model/posts';
 import { client, urlFor } from './sanity';
 
 const simplePostProjection = `

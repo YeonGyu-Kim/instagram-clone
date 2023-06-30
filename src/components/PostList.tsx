@@ -1,7 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-import { SimplePost } from '../../sanity-studio/model/posts';
+import { SimplePost } from '../model/posts';
 import PostListCard from './PostListCard';
 import GridSpinner from './ui/GridSpinner';
 

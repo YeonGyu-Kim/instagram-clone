@@ -7,8 +7,10 @@ import { RiHome6Fill } from 'react-icons/ri';
 import { BiSearch } from 'react-icons/bi';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import { AiFillPlusSquare } from 'react-icons/ai';
+import { useState } from 'react';
 
 export default function NavbarButton() {
+  const [openSearchModal, setOpenSearchModal] = useState(false);
   const pathName = usePathname();
   const menu = [
     {
@@ -28,10 +30,20 @@ export default function NavbarButton() {
       text: '만들기',
     },
   ];
+
+  const handleButton = (text: string) => {
+    if (text === '검색') {
+      setOpenSearchModal(true);
+    }
+  };
   return (
     <ul className='mt-6'>
       {menu.map((item, index) => (
-        <li key={`${item}-${index}`} className='py-2'>
+        <li
+          onClick={() => handleButton(item?.text)}
+          key={`${item}-${index}`}
+          className='py-2'
+        >
           {item?.href ? (
             <Link href={item?.href} className='flex items-center'>
               {item?.icon}

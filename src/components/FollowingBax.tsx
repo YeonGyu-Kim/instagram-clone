@@ -1,6 +1,6 @@
 'use client';
 import useSWR from 'swr';
-import { DetailUser } from '../../sanity-studio/model/user';
+import { DetailUser } from '../model/user';
 import { DotLoader } from 'react-spinners';
 import Link from 'next/link';
 import Avatar from './Avatar';
