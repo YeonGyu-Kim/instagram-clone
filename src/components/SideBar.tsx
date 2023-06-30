@@ -1,4 +1,4 @@
-import { User } from '../../sanity-studio/model/user';
+import { User } from '../model/user';
 import Avatar from './Avatar';
 
 type Props = {

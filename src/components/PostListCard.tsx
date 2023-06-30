@@ -7,7 +7,7 @@ import ModalPortal from './ui/ModalPortal';
 import PostModal from './PostModal';
 import PostUserAvatar from './PostUserAvatar';
 import PostDetail from './PostDetail';
-import { SimplePost } from '../../sanity-studio/model/posts';
+import { SimplePost } from '../model/posts';
 
 type Props = {
   post: SimplePost;

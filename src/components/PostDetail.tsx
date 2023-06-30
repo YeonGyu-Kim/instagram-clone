@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { FullPost, SimplePost } from '../../sanity-studio/model/posts';
+import { FullPost, SimplePost } from '../model/posts';
 import Image from 'next/image';
 import PostUserAvatar from './PostUserAvatar';
 import ActionBar from './ActionBar';

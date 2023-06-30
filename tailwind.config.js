@@ -29,6 +29,7 @@ module.exports = {
       'bg-gray': '#121212',
       'bg-black': '#000000',
       'font-white': '#F5F5F5',
+      'font-gray': '#727272',
       fuchsia: '#D20970',
       rose: '#FF007F',
       amber: '#FFBF00',
