@@ -14,7 +14,6 @@ export default function PostDetail({ post }: Props) {
   const { id, username, userImage, image, likes, createdAt } = post;
   const { data } = useSWR<FullPost>(`/api/posts/${id}`);
   const comments = data?.comments;
-  console.log(comments);
 
   return (
     <section className='flex w-full h-full'>
