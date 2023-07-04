@@ -1,12 +1,12 @@
 'use client';
 import useSWR from 'swr';
-import { DetailUser } from '../model/user';
+import { HomeUser } from '../model/user';
 import { DotLoader } from 'react-spinners';
 import Link from 'next/link';
 import Avatar from './Avatar';
 
 export default function FollowingBox() {
-  const { data, isLoading: loading } = useSWR<DetailUser>('/api/me');
+  const { data, isLoading: loading } = useSWR<HomeUser>('/api/me');
   const followingUsers = data?.following;
 
   return (
@@ -22,7 +22,7 @@ export default function FollowingBox() {
         <ul className='flex w-full gap-2'>
           {followingUsers.map(({ username, image }, index) => (
             <li key={`${username}-${index}`} className='text-center last:pr-4'>
-              <Link href={`/uesr/${username}`}>
+              <Link href={`/user/${username}`}>
                 <Avatar image={image} size='large' highlight />
                 <span>{username}</span>
               </Link>

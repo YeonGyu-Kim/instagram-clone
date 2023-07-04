@@ -10,7 +10,7 @@ export default function SWRConfigContext({ children }: Props) {
   return (
     <SWRConfig
       value={{
-        fetcher: (url) => fetch(url).then((res) => res.json()),
+        fetcher: async (url) => await fetch(url).then((res) => res.json()),
       }}
     >
       {children}
