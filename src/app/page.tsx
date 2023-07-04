@@ -3,7 +3,7 @@ import SideBar from '@/components/SideBar';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
-import FollowingBox from '@/components/FollowingBax';
+import FollowingBox from '@/components/FollowingBox';
 import UserSearch from '@/components/UserSearch';
 
 export default async function Home() {
