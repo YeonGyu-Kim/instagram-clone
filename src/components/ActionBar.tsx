@@ -15,11 +15,11 @@ export default function ActionBar({ username, text, createdAt, likes }: Props) {
     <div className='p-3 text-sm'>
       <div className='flex justify-between pb-1'>
         <div className='flex gap-3'>
-          <HeartIcon />
-          <CommentIcon />
+          <HeartIcon size={24} />
+          <CommentIcon size={24} />
         </div>
         <div>
-          <BookmarkIcon />
+          <BookmarkIcon size={24} />
         </div>
       </div>
       <p>{`좋아요 ${likes?.length ?? 0}개`}</p>
