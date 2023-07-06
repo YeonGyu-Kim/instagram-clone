@@ -1,5 +1,5 @@
 import { FaRegHeart } from 'react-icons/fa';
 
-export default function HeartIcon() {
-  return <FaRegHeart size={24} />;
+export default function HeartIcon({ size }: { size: number }) {
+  return <FaRegHeart size={size} />;
 }

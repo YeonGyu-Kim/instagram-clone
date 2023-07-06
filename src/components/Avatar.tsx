@@ -6,16 +6,16 @@ type Props = {
   highlight: boolean;
 };
 
+type ImageSizeStyle = {
+  container: string;
+  image: string;
+};
+
 export default function Avatar({
   image,
   size = 'large',
   highlight = false,
 }: Props) {
-  type ImageSizeStyle = {
-    container: string;
-    image: string;
-  };
-
   const getContainerStyle = (size: AvatarSize, highlight: boolean) => {
     const baseStyle = 'flex justify-center items-center rounded-full';
     const highlightStyle = highlight

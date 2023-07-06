@@ -1,5 +1,5 @@
 import { VscSmiley } from 'react-icons/vsc';
 
-export default function SmileIcon() {
-  return <VscSmiley size={24} />;
+export default function SmileIcon({ size }: { size: number }) {
+  return <VscSmiley size={size} />;
 }

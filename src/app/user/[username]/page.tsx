@@ -1,3 +1,4 @@
+import UserPosts from '@/components/UserPosts';
 import UserProfile from '@/components/UserProfile';
 import { getUserForProfile } from '@/service/user';
 import { notFound } from 'next/navigation';
@@ -13,5 +14,10 @@ export default async function UserPage({ params: { username } }: Props) {
   if (!user) {
     notFound();
   }
-  return <UserProfile user={user} />;
+  return (
+    <section className='w-full max-w-3xl m-auto'>
+      <UserProfile user={user} />
+      <UserPosts user={user} />
+    </section>
+  );
 }
