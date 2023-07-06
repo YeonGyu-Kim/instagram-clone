@@ -1,5 +1,5 @@
 import { FaRegComment } from 'react-icons/fa';
 
-export default function CommentIcon() {
-  return <FaRegComment size={24} />;
+export default function CommentIcon({ size }: { size: number }) {
+  return <FaRegComment size={size} />;
 }

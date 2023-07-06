@@ -12,7 +12,7 @@ export default function CommentForm() {
 
   return (
     <form className='flex items-center border-t border-border-gray p-2 text-sm'>
-      <SmileIcon />
+      <SmileIcon size={24} />
       <textarea
         ref={textRef}
         rows={rows}
