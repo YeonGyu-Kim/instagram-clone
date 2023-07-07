@@ -13,11 +13,6 @@ type Props = {
 
 const getUser = cache(async (username: string) => getUserForProfile(username));
 
-export const metadata: Metadata = {
-  title: 'User Detail',
-  description: 'Stargram Photos',
-};
-
 export default async function UserPage({ params: { username } }: Props) {
   const user = await getUser(username);
   if (!user) {
