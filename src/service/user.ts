@@ -75,3 +75,28 @@ export async function getUserForProfile(username: string) {
       posts: user?.posts ?? 0,
     }));
 }
+
+export async function addBookmark(postId: string, token?: string) {
+  if (token) {
+    return client
+      .patch(token)
+      .setIfMissing({ bookmarks: [] })
+      .append('bookmarks', [
+        {
+          _ref: postId,
+          _type: 'reference',
+        },
+      ])
+      .commit({ autoGenerateArrayKeys: true });
+  } else {
+    return;
+  }
+}
+
+export async function removeBookmark(postId: string, token?: string) {
+  if (!token) return;
+  return client
+    .patch(token)
+    .unset([`bookmarks[_ref=="${postId}"]`])
+    .commit();
+}
