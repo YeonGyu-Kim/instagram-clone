@@ -1,13 +1,12 @@
 'use client';
-import useSWR from 'swr';
-import { HomeUser } from '../model/user';
 import { DotLoader } from 'react-spinners';
 import Link from 'next/link';
 import Avatar from './Avatar';
+import useMe from '@/hooks/me';
 
 export default function FollowingBox() {
-  const { data, isLoading: loading } = useSWR<HomeUser>('/api/me');
-  const followingUsers = data?.following;
+  const { user, isLoading: loading } = useMe();
+  const followingUsers = user?.following;
 
   return (
     <section className='mb-4 flex justify-center items-center w-full rounded-lg shadow-sm p-4 border border-border-gray overflow-x-auto scrollbar-thin scrollbar-thumb-fuchsia scrollbar-track-bg-gray'>
