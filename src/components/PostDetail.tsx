@@ -1,21 +1,18 @@
-import useSWR from 'swr';
-import { FullPost, SimplePost } from '../model/posts';
+import { SimplePost } from '../model/posts';
 import Image from 'next/image';
 import PostUserAvatar from './PostUserAvatar';
 import ActionBar from './ActionBar';
-import CommentForm from './CommentForm';
 import Avatar from './Avatar';
+import useFullPost from '@/hooks/post';
 
 type Props = {
   post: SimplePost;
 };
 
 export default function PostDetail({ post }: Props) {
-  const { id, username, userImage, image, likes, createdAt } = post;
-  const { data } = useSWR<FullPost>(`/api/posts/${id}`);
+  const { id, username, userImage, image } = post;
+  const { post: data, postComment } = useFullPost(id);
   const comments = data?.comments;
-
-  const handlePostComment = (comment: string) => {};
 
   return (
     <section className='flex w-full h-full'>
@@ -51,8 +48,7 @@ export default function PostDetail({ post }: Props) {
               )
             )}
         </ul>
-        <ActionBar post={post} />
-        <CommentForm onPostComment={handlePostComment} />
+        <ActionBar post={post} onComment={postComment} />
       </div>
     </section>
   );

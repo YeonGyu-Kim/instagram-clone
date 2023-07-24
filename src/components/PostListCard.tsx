@@ -1,13 +1,12 @@
 'use client';
 import Image from 'next/image';
-import CommentForm from './CommentForm';
 import ActionBar from './ActionBar';
 import { useState } from 'react';
 import ModalPortal from './ui/ModalPortal';
 import PostModal from './PostModal';
 import PostUserAvatar from './PostUserAvatar';
 import PostDetail from './PostDetail';
-import { SimplePost } from '../model/posts';
+import { Comment, SimplePost } from '../model/posts';
 import usePosts from '@/hooks/posts';
 
 type Props = {
@@ -19,7 +18,7 @@ export default function PostListCard({ post, priority = false }: Props) {
   const { username, userImage, image, text, comments } = post;
   const [openModal, setOpenModal] = useState(false);
   const { postComment } = usePosts();
-  const handlePostComment = (comment: string) => {
+  const handlePostComment = (comment: Comment) => {
     postComment(post, comment);
   };
   return (
@@ -34,7 +33,7 @@ export default function PostListCard({ post, priority = false }: Props) {
         priority={priority}
         onClick={() => setOpenModal(true)}
       />
-      <ActionBar post={post}>
+      <ActionBar post={post} onComment={handlePostComment}>
         {text && (
           <p className='py-1'>
             <span>{username}</span>
@@ -47,7 +46,6 @@ export default function PostListCard({ post, priority = false }: Props) {
           >{`댓글 ${comments}개 모두 보기`}</button>
         )}
       </ActionBar>
-      <CommentForm onPostComment={handlePostComment} />
       {openModal && (
         <ModalPortal>
           <PostModal onClose={() => setOpenModal(false)}>
