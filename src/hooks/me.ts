@@ -1,5 +1,6 @@
 import { HomeUser } from '@/model/user';
-import useSWR, { mutate } from 'swr';
+import { useCallback } from 'react';
+import useSWR from 'swr';
 
 async function updateBookmark(postId: string, bookmark: boolean) {
   return fetch('/api/bookmarks', {
@@ -11,10 +12,11 @@ async function updateBookmark(postId: string, bookmark: boolean) {
 export default function useMe() {
   const { data: user, isLoading, error } = useSWR<HomeUser>('/api/me');
 
-  const setBookmark = (postId: string, bookmark: boolean) => {
-    if (!user) return;
+  const setBookmark = useCallback(
+    (postId: string, bookmark: boolean) => {
+      if (!user) return;
 
-    /* const bookmarks = user.bookmarks;
+      /* const bookmarks = user.bookmarks;
     const newUser = {
       ...user,
       bookmarks: bookmark
@@ -29,11 +31,13 @@ export default function useMe() {
       rollbackOnError: true,
     }); */
 
-    return fetch('/api/bookmarks', {
-      method: 'PUT',
-      body: JSON.stringify({ id: postId, bookmark }),
-    }).then((res) => res.json());
-  };
+      return fetch('/api/bookmarks', {
+        method: 'PUT',
+        body: JSON.stringify({ id: postId, bookmark }),
+      }).then((res) => res.json());
+    },
+    [user]
+  );
 
   return { user, isLoading, error, setBookmark };
 }

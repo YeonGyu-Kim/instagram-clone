@@ -2,27 +2,49 @@
 import { useRef, useState } from 'react';
 import SmileIcon from './ui/icons/SmileIcon';
 
-export default function CommentForm() {
+type Props = {
+  onPostComment: (comment: string) => void;
+};
+
+export default function CommentForm({ onPostComment }: Props) {
+  const [comment, setComment] = useState('');
+  const buttonDisabled = comment.length === 0;
   const textRef = useRef<HTMLTextAreaElement>(null);
   const [rows, setRows] = useState<number | undefined>(1);
-  const handleResizeHeight = () => {
+  const handleResizeHeight = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value.trim());
     textRef?.current?.scrollHeight &&
       setRows(Math.floor(textRef?.current?.scrollHeight / 20));
   };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onPostComment(comment);
+    setComment('');
+  };
 
   return (
-    <form className='flex items-center border-t border-border-gray p-2 text-sm'>
+    <form
+      onSubmit={handleSubmit}
+      className='flex items-center border-t border-border-gray p-2 text-sm'
+    >
       <SmileIcon size={24} />
       <textarea
         ref={textRef}
         rows={rows}
-        onInput={handleResizeHeight}
+        value={comment}
+        onChange={handleResizeHeight}
         className='w-[90%] ml-2 bg-bg-gray focus:outline-none p-1 resize-none overflow-hidden'
         placeholder='댓글 달기...'
         autoComplete='off'
         autoCorrect='off'
+        required
       />
-      <button className='text-btn-post font-semibold w-[40px]'>게시</button>
+      <button
+        disabled={buttonDisabled}
+        className='text-btn-blue font-semibold w-[40px]'
+      >
+        {!buttonDisabled && '게시'}
+      </button>
     </form>
   );
 }
