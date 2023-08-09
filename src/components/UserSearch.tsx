@@ -6,10 +6,13 @@ import GridSpinner from './ui/GridSpinner';
 import { SearchUser } from '@/model/user';
 import UserCard from './UserCard';
 import useDebounce from '@/hooks/debounce';
+import useThrottle from '@/hooks/throttle';
 
 export default function UserSearch() {
   const [keyword, setKeyword] = useState('');
   const debouncedKeyword = useDebounce(keyword);
+  // const throttleKeyword = useThrottle(keyword);
+
   const {
     data: users,
     isLoading,
