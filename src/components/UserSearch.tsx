@@ -1,23 +1,28 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useCallback, useMemo } from 'react';
 import useSWR from 'swr';
 import GridSpinner from './ui/GridSpinner';
 import { SearchUser } from '@/model/user';
 import UserCard from './UserCard';
 import useDebounce from '@/hooks/debounce';
 import useThrottle from '@/hooks/throttle';
+import { debounce } from 'lodash';
 
 export default function UserSearch() {
   const [keyword, setKeyword] = useState('');
-  const debouncedKeyword = useDebounce(keyword);
-  // const throttleKeyword = useThrottle(keyword);
+  const [debouncedValue, setDebouncedValue] = useState(keyword);
+  const [throttledValue, setThrottledValue] = useState(keyword);
+  //const debouncedKeyword = useDebounce(keyword);
+  //const throttleKeyword = useThrottle(keyword);
+  const { handleDebounced } = useDebounce(setDebouncedValue);
+  //const { handleThrottle } = useThrottle(setThrottledValue);
 
   const {
     data: users,
     isLoading,
     error,
-  } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
+  } = useSWR<SearchUser[]>(`/api/search/${debouncedValue}`);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +36,11 @@ export default function UserSearch() {
           autoFocus
           placeholder='검색'
           value={keyword}
-          onChange={(e) => setKeyword(e?.target?.value)}
+          onChange={(e) => {
+            setKeyword(e?.target.value);
+            handleDebounced(e?.target.value);
+            //handleThrottle(e?.target.value);
+          }}
         ></input>
       </form>
       {isLoading && <GridSpinner />}
