@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { throttle } from 'lodash';
+import { useEffect, useRef, useState, useMemo } from 'react';
 
-export default function useThrottle(keyword: string, delay: number = 500) {
+/* export default function useThrottle(keyword: string, delay: number = 2000) {
   const isThrottled = useRef(false);
   const [throttledValue, setThrottledValue] = useState(keyword);
 
@@ -16,4 +17,18 @@ export default function useThrottle(keyword: string, delay: number = 500) {
     }
   }, [keyword, delay]);
   return throttledValue;
+} */
+
+export default function useThrottle(
+  setThrottledValue: (keyword: string) => void
+) {
+  const handleThrottle = useMemo(
+    () =>
+      throttle((value: string) => {
+        setThrottledValue(value);
+      }, 2000),
+    [setThrottledValue]
+  );
+
+  return { handleThrottle };
 }
