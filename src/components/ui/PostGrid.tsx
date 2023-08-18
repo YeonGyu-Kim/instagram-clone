@@ -1,16 +1,9 @@
-import useSWR from 'swr';
 import GridSpinner from './GridSpinner';
-import { SimplePost } from '@/model/posts';
 import PostGridCard from '../PostGridCard';
 import usePosts from '@/hooks/posts';
 
-type Props = {
-  username: string;
-  query: string;
-};
-
-export default function PostGrid({ username, query }: Props) {
-  const { posts, isLoading } = usePosts(`/api/users/${username}/${query}`);
+export default function PostGrid() {
+  const { posts, isLoading } = usePosts();
   return (
     <div>
       <div className='flex justify-center'>{isLoading && <GridSpinner />}</div>
