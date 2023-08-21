@@ -7,7 +7,7 @@ type Props = {
 
 export default function SideBar({ user: { name, email, image } }: Props) {
   return (
-    <section className='flex flex-col w-full max-w-[319px] ml-6'>
+    <section className='flex flex-col w-full max-w-[319px] mt-6 ml-6'>
       <div className='flex items-center pb-4'>
         {image && (
           <>

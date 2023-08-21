@@ -4,7 +4,7 @@ type Props = {
   text: string;
   onClick: () => void;
   blue?: boolean;
-  isUpdating: boolean;
+  isUpdating?: boolean;
 };
 
 export default function Button({ text, onClick, blue, isUpdating }: Props) {
