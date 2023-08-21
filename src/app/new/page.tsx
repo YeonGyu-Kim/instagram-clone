@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
-export const metaData: Metadata = {
+export const metadata: Metadata = {
   title: 'New Post',
   description: 'Create a new post',
 };
