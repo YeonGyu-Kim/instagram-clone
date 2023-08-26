@@ -4,8 +4,9 @@ import { AuthUser } from '@/model/user';
 import PostUserAvatar from './PostUserAvatar';
 import FilesIcon from './ui/icons/FilesIcon';
 import Button from './ui/Button';
-import { useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   user: AuthUser;
@@ -14,6 +15,8 @@ type Props = {
 export default function NewPost({ user: { name, image } }: Props) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>();
+  const textRef = useRef<HTMLTextAreaElement>(null);
+  const router = useRouter();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const files = e.target?.files;
@@ -39,10 +42,32 @@ export default function NewPost({ user: { name, image } }: Props) {
       setFile(files[0]);
     }
   };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('text', textRef.current?.value ?? '');
+
+    fetch('/api/posts/', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          console.error();
+          return;
+        }
+        router.push('/');
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <section className='w-full flex flex-col items-center mt-6'>
       <PostUserAvatar username={name} image={image ?? ''} />
-      <form className='w-full flex flex-col px-6'>
+      <form className='w-full flex flex-col px-6' onSubmit={handleSubmit}>
         <input
           className='hidden'
           name='input'
@@ -88,6 +113,7 @@ export default function NewPost({ user: { name, image } }: Props) {
           required
           rows={10}
           placeholder='내용을 작성하세요...'
+          ref={textRef}
         />
         <Button text='등록' onClick={() => {}} />
       </form>
