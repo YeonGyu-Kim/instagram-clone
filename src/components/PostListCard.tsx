@@ -23,7 +23,7 @@ export default function PostListCard({ post, priority = false }: Props) {
   };
   return (
     <article className='rounded-lg border border-border-gray mb-4'>
-      <PostUserAvatar image={userImage} username={username} />
+      {/*   <PostUserAvatar image={userImage} username={username} /> */}
       <Image
         className='w-full object-cover aspect-square'
         src={image}
@@ -46,13 +46,13 @@ export default function PostListCard({ post, priority = false }: Props) {
           >{`댓글 ${comments}개 모두 보기`}</button>
         )}
       </ActionBar>
-      {openModal && (
+      {/*  {openModal && (
         <ModalPortal>
           <PostModal onClose={() => setOpenModal(false)}>
             <PostDetail post={post} />
           </PostModal>
         </ModalPortal>
-      )}
+      )} */}
     </article>
   );
 }
