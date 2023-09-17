@@ -33,6 +33,4 @@ describe('PostListCard', () => {
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
-
-  // 배포 test
 });
