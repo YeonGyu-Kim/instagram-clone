@@ -23,7 +23,12 @@ export default function UserSearch() {
   const { handleDebounced } = useDebounce(setDebouncedValue);
   //const { handleThrottle } = useThrottle(setThrottledValue);
 
-  const { register, handleSubmit } = useForm<FormData>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>();
 
   const {
     data: users,
@@ -34,7 +39,9 @@ export default function UserSearch() {
   /* const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   }; */
-
+  const trimKeyword = (text: string) => {
+    return text.replace(/\s+/g, '');
+  };
   const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
   return (
     <section className='w-full max-w-md flex flex-col items-center p-6'>
@@ -58,16 +65,21 @@ export default function UserSearch() {
           type='text'
           autoFocus
           placeholder='검색'
-          value={keyword}
+          //value={keyword}
           {...register('user', {
             required: true,
+            /*  pattern: {
+              value: /^[0-9]+$/,
+              message: '숫자만가능',
+            }, */
             onChange: (e) => {
-              setKeyword(e?.target.value);
-              handleDebounced(e?.target.value);
+              setKeyword(trimKeyword(e?.target.value));
+              handleDebounced(trimKeyword(e?.target.value));
               //handleThrottle(e?.target.value);
             },
           })}
-        ></input>
+        />
+        {/* <p>{errors.user?.message}</p> */}
       </form>
       {isLoading && <GridSpinner />}
       {!isLoading && !error && users?.length === 0 && <>검색 결과 없음</>}
