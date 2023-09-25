@@ -7,7 +7,7 @@ import Avatar from './Avatar';
 import Link from 'next/link';
 import NavbarButton from './NavbarButton';
 
-const caveat = Caveat({ subsets: ['latin'] });
+const caveat = Caveat({ weight: '400', subsets: ['latin'], display: 'swap' });
 
 export default function Navbar() {
   const { data: session } = useSession();

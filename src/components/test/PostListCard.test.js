@@ -1,6 +1,9 @@
 import PostListCard from '@/components/PostListCard';
 import { parseDate } from '@/util/date';
 import { render, screen } from '@testing-library/react';
+import { withRouter } from 'next/router';
+import { Route } from 'react-router-dom';
+import renderer from 'react-test-renderer';
 
 describe('PostListCard', () => {
   const post = {
@@ -22,5 +25,12 @@ describe('PostListCard', () => {
     expect(screen.getAllByText(post.username));
     expect(screen.getByText(post.text)).toBeInTheDocument();
     expect(screen.getByText(parseDate(post.createdAt))).toBeInTheDocument();
+  });
+
+  it('스냅샷 테스트', () => {
+    const component = renderer.create(
+      <PostListCard post={post} priority={false} />
+    );
+    expect(component.toJSON()).toMatchSnapshot();
   });
 });
