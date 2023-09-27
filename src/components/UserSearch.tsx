@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback, useMemo } from 'react';
+import { useState, useRef, useCallback, useMemo, useEffect } from 'react';
 import useSWR from 'swr';
 import GridSpinner from './ui/GridSpinner';
 import { SearchUser } from '@/model/user';
@@ -9,12 +9,16 @@ import useDebounce from '@/hooks/debounce';
 import useThrottle from '@/hooks/throttle';
 import { debounce } from 'lodash';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 type FormData = {
   user: string;
+  users: SearchUser | undefined;
 };
 
 export default function UserSearch() {
+  const router = useRouter();
+  const [isEntered, setIsEntered] = useState(false);
   const [keyword, setKeyword] = useState('');
   const [debouncedValue, setDebouncedValue] = useState(keyword);
   const [throttledValue, setThrottledValue] = useState(keyword);
@@ -42,7 +46,18 @@ export default function UserSearch() {
   const trimKeyword = (text: string) => {
     return text.replace(/\s+/g, '');
   };
-  const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormData> = () => {
+    setIsEntered(true);
+  };
+
+  useEffect(() => {
+    if (isEntered) {
+      if (users) {
+        users?.length > 0 && router.push(`/user/${users[0]?.username}`);
+      }
+      setIsEntered(false);
+    }
+  }, [isEntered, users, router]);
   return (
     <section className='w-full max-w-md flex flex-col items-center p-6'>
       {/*  <form onSubmit={onSubmit}>
